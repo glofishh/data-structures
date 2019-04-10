@@ -9,7 +9,7 @@ var Stack = function() {
   someInstance.push = function(value) {
     storage[size] = value
     size ++
-    Object.assign(someInstance, storage)
+    _.extend(someInstance, storage)
   };
 
   someInstance.pop = function() {

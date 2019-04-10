@@ -11,7 +11,7 @@ var Queue = function() {
     //enqueue from the back
     storage[size] = value
     size ++
-    Object.assign(someInstance, storage)
+    _.extend(someInstance, storage)
   };
 
   someInstance.dequeue = function() {
