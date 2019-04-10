@@ -27,7 +27,6 @@ var Queue = function() {
       someInstance[Number(key) - 1] = someInstance[key]
     }
 
-
     return dequeued
 
   };
@@ -38,15 +37,3 @@ var Queue = function() {
 
   return someInstance;
 };
-
-
-debugger
-let queue = Queue()
-
-queue.enqueue('a');
-queue.enqueue('b');
-queue.dequeue();
-queue.enqueue('c');
-
-console.log(queue.dequeue()) //b
-console.log
