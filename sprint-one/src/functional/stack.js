@@ -4,31 +4,31 @@ var Stack = function() {
   // Use an object with numeric keys to store values
   var storage = {};
 
-  let size = 0
+
   // Implement the methods below
   someInstance.push = function(value) {
-    storage[size] = value
-    size ++
-    _.extend(someInstance, storage)
+    storage[someInstance.size()] = value
   };
 
   someInstance.pop = function() {
-    if(size === 0){
+    if(someInstance.size === 0){
       return undefined
     }
-    size--
-    let popped = storage[size]
 
-    delete someInstance[size]
-    delete storage[size]
+    let popped = storage[someInstance.size() - 1]
+
+    delete storage[someInstance.size() - 1]
 
     return popped
 
   };
 
   someInstance.size = function() {
-    return size
+    return Object.keys(storage).length
   };
+
 
   return someInstance;
 };
+
+

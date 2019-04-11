@@ -1,7 +1,9 @@
 var Queue = function() {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
-  let instance = {}
+  let instance = {
+    storage: {}
+  }
   instance.count= 0
 
   Object.assign(instance, queueMethods)
@@ -11,28 +13,31 @@ var Queue = function() {
 
 var queueMethods = {
   enqueue : function(value){
-    this[this.count] = value
-    this.count++
+    this.storage[this.size()] = value
+
   },
   dequeue : function(){
-    if(this.count === 0){
+    if(this.size() === 0){
       return undefined
     }
-    this.count--
-    let dequeued = this[0]
 
-    for(let key in this){
+    let dequeued = this.storage[0]
+
+    for(let key in this.storage){
       //typeof NaN === number, but NaN doens't equal itself; filters out non-number keys
-      if(key !== '0' && Number(key) === Number(key)){
-      this[Number(key) - 1] = this[key]
-      delete this[key]
+      if(key !== '0'){
+      this.storage[Number(key) - 1] = this.storage[key]
       }
+      if(Number(key) === this.size() - 1){
+        delete this.storage[key]
+      }
+
     }
     return dequeued
 
   },
   size : function(){
-    return this.count
+    return Object.keys(this.storage).length
   }
 };
 
@@ -40,9 +45,8 @@ debugger
 let queue = Queue()
 
 queue.enqueue('a');
+console.log(queue.dequeue())
 queue.enqueue('b');
-queue.dequeue();
-console.log(queue.size()) // 1
-console.log(queue)
+console.log(queue.dequeue())
 
 
