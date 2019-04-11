@@ -23,8 +23,10 @@ var Queue = function() {
     let dequeued = storage[0]
 
     for(let key in storage){
-      storage[Number(key) - 1] = storage[key]
-      someInstance[Number(key) - 1] = someInstance[key]
+      if(key !== '0' && Number(key) === Number(key)){
+        storage[Number(key) - 1] = storage[key]
+        someInstance[Number(key) - 1] = someInstance[key]
+      }
     }
 
     return dequeued

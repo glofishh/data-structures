@@ -4,7 +4,7 @@ var Queue = function() {
   let instance = {}
   instance.count= 0
 
-  _.extend(instance, queueMethods)
+  Object.assign(instance, queueMethods)
 
   return instance
 };
@@ -22,7 +22,11 @@ var queueMethods = {
     let dequeued = this[0]
 
     for(let key in this){
+      //typeof NaN === number, but NaN doens't equal itself; filters out non-number keys
+      if(key !== '0' && Number(key) === Number(key)){
       this[Number(key) - 1] = this[key]
+      delete this[key]
+      }
     }
     return dequeued
 
@@ -39,6 +43,6 @@ queue.enqueue('a');
 queue.enqueue('b');
 queue.dequeue();
 console.log(queue.size()) // 1
-
+console.log(queue)
 
 
